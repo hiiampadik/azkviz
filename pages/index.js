@@ -1,8 +1,52 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Home.module.scss";
+
+import Hexagons from "../components/Hegagons";
+
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
+
+import { useState } from "react";
 
 export default function Home() {
+  const [showWindow, setShowWindow] = useState(null);
+  const [playing, setPlaying] = useState(false);
+
+  // 0 - white
+  // 1 - orange
+  // 2 - blue
+  // 3 - black
+  const [colors, setColor] = useState([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
+
+  const handleClick = (id) => {
+    if (showWindow === null) {
+      setShowWindow(id);
+    }
+  };
+
+  const handleClose = () => {
+    setShowWindow(null);
+    setPlaying(false);
+  };
+
+  const handleWinner = (color) => {
+    let newColors = [...colors];
+    if (color === 'orange'){
+      newColors[showWindow - 1] = 1
+
+    } else if (color === 'blue'){
+      newColors[showWindow - 1] = 2
+
+    } else if (color === 'black'){
+      newColors[showWindow - 1] = 3
+
+    }
+    setColor(newColors);
+
+    setShowWindow(null);
+    setPlaying(false);
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -12,58 +56,45 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        {showWindow !== null ? (
+          <div className={styles.questionContainer}>
+            <div
+              className={styles.questionClose}
+              onClick={() => handleClose()}
+            ></div>
+            <div className={styles.countdownContainer}>
+              <CountdownCircleTimer
+                isPlaying={playing}
+                duration={10}
+                colors={["#075e80", "#73ebf8", "#f7b419", "#f51e05"]}
+                size={400}
+                colorsTime={[10, 7, 4, 0]}
+                strokeWidth={30}
+              >
+                {({ remainingTime }) => remainingTime}
+              </CountdownCircleTimer>
+            </div>
+            <div
+              className={styles.startButton}
+              onClick={() => setPlaying(true)}
+            >
+              START
+            </div>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+            <div className={styles.questionWinner}>
+              <div className={styles.questionWinnerBlue} onClick={() => handleWinner('blue')}></div>
+              <div className={styles.questionWinnerBlack} onClick={() => handleWinner('black')}></div>
+              <div className={styles.questionWinnerOrange} onClick={() => handleWinner('orange')}></div>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+        <Hexagons handleClick={handleClick} colors={colors}/>
       </main>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+      <footer className={styles.footer}></footer>
     </div>
-  )
+  );
 }
