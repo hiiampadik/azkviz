@@ -8,7 +8,12 @@ import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 import { useState } from "react";
 
+import useSound from "use-sound";
+
 export default function Home() {
+  const [playBuzz] = useSound("/buzz.mp3");
+  const [playZnelka] = useSound("/znelka.mp3");
+
   const [showWindow, setShowWindow] = useState(null);
   const [playing, setPlaying] = useState(false);
 
@@ -16,7 +21,6 @@ export default function Home() {
   const [left, setLeft] = useState(0);
 
   const [key, setKey] = useState(0);
-
 
   // 0 - white
   // 1 - orange
@@ -58,12 +62,12 @@ export default function Home() {
   ]);
 
   const handleClick = (id, top, left) => {
-      setTop(top);
-      setLeft(left);
-      setShowWindow(id);
+    setTop(top);
+    setLeft(left);
+    setShowWindow(id);
 
-      setKey(prevKey => prevKey + 1);
-      setPlaying(false);
+    setKey((prevKey) => prevKey + 1);
+    setPlaying(false);
   };
 
   const handleClose = () => {
@@ -95,28 +99,26 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-
+        <div className={styles.soundButton} onClick={playZnelka}></div>
         {showWindow !== null ? (
           <>
-            <div
+            {/* <div
               className={styles.questionClose}
               onClick={() => handleClose()}
-            ></div>
+            ></div> */}
 
-            <div
-              className={styles.countdownContainer}
-            >
+            <div className={styles.countdownContainer}>
               <div
                 className={styles.countdownHexagon}
                 style={{ top: top, left: left }}
                 onClick={() => setPlaying(true)}
-
               >
                 <CountdownCircleTimer
+                  onComplete={playBuzz}
                   key={key}
                   isPlaying={playing}
                   duration={10}
-                  colors={["#000", "#37af00",  "#ff1111", "#ff1111"]}
+                  colors={["#000", "#37af00", "#ff1111", "#ff1111"]}
                   size={60}
                   colorsTime={[10, 6, 2, 0]}
                   strokeWidth={5}
@@ -146,6 +148,7 @@ export default function Home() {
           ""
         )}
         <Hexagons handleClick={handleClick} colors={colors} />
+        <div className={styles.background} onClick={() => handleClose()}></div>
       </main>
 
       <footer className={styles.footer}></footer>
