@@ -17,11 +17,11 @@ const getColor = (i) => {
 
 return (
      <div className={styles.hexContainer}>
-     <div className={`${styles.number} ${styles[getColor(1)]}`} onClick={() => props.handleClick(1)} style={{top: '0px', left: '240px'}} id="div_1">1</div>
-     <div className={`${styles.number} ${styles[getColor(2)]}`} onClick={() => props.handleClick(2)} style={{top: '69px', left: '200px'}} id="div_2">2</div>
-     <div className={`${styles.number} ${styles[getColor(3)]}`} onClick={() => props.handleClick(3)} style={{top: '69px', left: '281px'}} id="div_3">3</div>
-     <div className={`${styles.number} ${styles[getColor(4)]}`} onClick={() => props.handleClick(4)} style={{top: '138px', left: '160px'}} id="div_4">4</div>
-     <div className={`${styles.number} ${styles[getColor(5)]}`} onClick={() => props.handleClick(5)} style={{top: '138px', left: '241px'}} id="div_5">5</div>
+     <div className={`${styles.number} ${styles[getColor(1)]}`} onClick={() => props.handleClick(1)} style={{top: '0px', left: '240px'}} id="div_1">A</div>
+     <div className={`${styles.number} ${styles[getColor(2)]}`} onClick={() => props.handleClick(2)} style={{top: '69px', left: '200px'}} id="div_2">B</div>
+     <div className={`${styles.number} ${styles[getColor(3)]}`} onClick={() => props.handleClick(3)} style={{top: '69px', left: '281px'}} id="div_3">C</div>
+     <div className={`${styles.number} ${styles[getColor(4)]}`} onClick={() => props.handleClick(4)} style={{top: '138px', left: '160px'}} id="div_4">Č</div>
+     <div className={`${styles.number} ${styles[getColor(5)]}`} onClick={() => props.handleClick(5)} style={{top: '138px', left: '241px'}} id="div_5">D</div>
      <div className={`${styles.number} ${styles[getColor(6)]}`} onClick={() => props.handleClick(6)} style={{top: '138px', left: '322px'}} id="div_6">6</div>
      <div className={`${styles.number} ${styles[getColor(7)]}`} onClick={() => props.handleClick(7)} style={{top: '207px', left: '120px'}} id="div_7">7</div>
      <div className={`${styles.number} ${styles[getColor(8)]}`} onClick={() => props.handleClick(8)} style={{top: '207px', left: '201px'}} id="div_8">8</div>

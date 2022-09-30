@@ -1,3 +1,13 @@
+.main{
+  height: 100vh;
+  width: 100vw;
+  background-image: url(../public/bg.jpg);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  
+}
+
 .hexContainer {
   position: absolute;
   left: calc(50vw - ((486px + 80px) / 2));
@@ -10,8 +20,8 @@
   width: 80px;
   height: 100px;
   text-align: center;
-  font-size: 30pt;
-  padding-top: 25px;
+  font-size: 30rem;
+  padding-top: 30px;
   background-size: 80px 89px;
 
   color: black;
@@ -80,8 +90,11 @@
 }
 
 .countdownContainer {
-  margin: 10vh auto 1rem auto;
-  width: min-content;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
   font-size: 2rem;
   font-weight: bold;
 }
@@ -140,4 +153,14 @@
 .questionWinnerOrange:hover {
   transform: scale(1.05);
   filter: brightness(0.8) contrast(1.2);
+}
+
+.questionLetter{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 3rem;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  color: black
 }
