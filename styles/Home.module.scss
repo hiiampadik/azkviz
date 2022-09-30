@@ -1,15 +1,14 @@
-.main{
+.main {
   height: 100vh;
   width: 100vw;
   background-image: url(../public/bg.jpg);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  
 }
 
 .hexContainer {
-  position: absolute;
+  position: fixed;
   left: calc(50vw - ((486px + 80px) / 2));
   top: 20%;
   transform: translate(0%, -50%);
@@ -37,22 +36,19 @@
   filter: brightness(0.8) contrast(1.2);
 }
 
-.numberWhite{
+.numberWhite {
   background: url(../public/white.svg) no-repeat;
-
 }
 
-.numberOrange{
+.numberOrange {
   background: url(../public/orange.svg) no-repeat;
-
 }
 
-.numberBlue{
+.numberBlue {
   background: url(../public/blue.svg) no-repeat;
-
 }
 
-.numberBlack{
+.numberBlack {
   background: url(../public/black.svg) no-repeat;
   color: white;
 }
@@ -89,20 +85,44 @@
   cursor: pointer;
 }
 
+
+
 .countdownContainer {
+  position: fixed;
+  left: calc(50vw - ((486px + 80px) / 2));
+  top: 20%;
+  transform: translate(0%, -50%);
+
+  z-index: 100;
+
+}
+
+.countdownHexagon {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  
-  font-size: 2rem;
+  width: 80px;
+  height: 89px;
+  text-align: center;
+  font-size: 30rem;
+  background-size: 80px 89px;
+
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
+  font-size: 30px;
+  user-select: none;
+  cursor: pointer;
+  background: url(../public/count.svg) no-repeat;
+  left: 50%;
+  top: 50%;
+  transform: scale(1.7);
+  padding: 10px;
+  padding-top: 14px;
 }
 
 .startButton {
   text-align: center;
   display: block;
-  margin: 1rem auto;
+  margin: 0;
   padding: 1rem;
   font-weight: bold;
   font-size: 2rem;
@@ -117,7 +137,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
-  
+
   margin: 0 auto;
 }
 
@@ -155,12 +175,15 @@
   filter: brightness(0.8) contrast(1.2);
 }
 
-.questionLetter{
+.questionLetter {
   position: absolute;
   top: 50%;
   left: 50%;
-  font-size: 3rem;
+  font-size: 1rem;
   transform: translate(-50%, -50%);
   z-index: 100;
-  color: black
+  color: black;
+
+  font-family: sans-serif, "Helvetica Neue", "Lucida Grande", Arial;
+  font-stretch: ultra-condensed;
 }

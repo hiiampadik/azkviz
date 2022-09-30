@@ -12,6 +12,12 @@ export default function Home() {
   const [showWindow, setShowWindow] = useState(null);
   const [playing, setPlaying] = useState(false);
 
+  const [top, setTop] = useState(0);
+  const [left, setLeft] = useState(0);
+
+  const [key, setKey] = useState(0);
+
+
   // 0 - white
   // 1 - orange
   // 2 - blue
@@ -40,6 +46,7 @@ export default function Home() {
     "P",
     "QT",
     "R",
+    "S",
     "Š",
     "T",
     "U",
@@ -50,10 +57,13 @@ export default function Home() {
     "Z",
   ]);
 
-  const handleClick = (id) => {
-    if (showWindow === null) {
+  const handleClick = (id, top, left) => {
+      setTop(top);
+      setLeft(left);
       setShowWindow(id);
-    }
+
+      setKey(prevKey => prevKey + 1);
+      setPlaying(false);
   };
 
   const handleClose = () => {
@@ -85,31 +95,36 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
+
         {showWindow !== null ? (
-          <div className={styles.questionContainer}>
+          <>
             <div
               className={styles.questionClose}
               onClick={() => handleClose()}
             ></div>
-            <div className={styles.countdownContainer}>
-              <CountdownCircleTimer
-                isPlaying={playing}
-                duration={10}
-                colors={["#075e80", "#73ebf8", "#f7b419", "#f51e05"]}
-                size={200}
-                colorsTime={[10, 7, 4, 0]}
-                strokeWidth={20}
-              ></CountdownCircleTimer>
-              <div className={styles.questionLetter}>
-                {letters[showWindow - 1]}
-              </div>
-            </div>
 
             <div
-              className={styles.startButton}
-              onClick={() => setPlaying(true)}
+              className={styles.countdownContainer}
             >
-              START
+              <div
+                className={styles.countdownHexagon}
+                style={{ top: top, left: left }}
+                onClick={() => setPlaying(true)}
+
+              >
+                <CountdownCircleTimer
+                  key={key}
+                  isPlaying={playing}
+                  duration={10}
+                  colors={["#000", "#37af00",  "#ff1111", "#ff1111"]}
+                  size={60}
+                  colorsTime={[10, 6, 2, 0]}
+                  strokeWidth={5}
+                ></CountdownCircleTimer>
+                <div className={styles.questionLetter}>
+                  {letters[showWindow - 1]}
+                </div>
+              </div>
             </div>
 
             <div className={styles.questionWinner}>
@@ -126,11 +141,10 @@ export default function Home() {
                 onClick={() => handleWinner("orange")}
               ></div>
             </div>
-          </div>
+          </>
         ) : (
           ""
         )}
-
         <Hexagons handleClick={handleClick} colors={colors} />
       </main>
 
